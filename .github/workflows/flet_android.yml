@@ -1,4 +1,4 @@
-yamlname: Build Flet Android APK
+name: Build Flet Android APK
 
 on:
   push:
