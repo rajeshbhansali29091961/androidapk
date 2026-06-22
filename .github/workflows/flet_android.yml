@@ -27,7 +27,8 @@ jobs:
     - name: Set up Flutter
       uses: subosito/flutter-action@v2
       with:
-        flutter-version: '3.22.x'
+        # Flet की जरूरत के मुताबिक Flutter का सही वर्जन यहाँ सेट किया गया है
+        flutter-version: '3.41.7'
 
     - name: Install Android SDK
       uses: android-actions/setup-android@v3
@@ -40,7 +41,8 @@ jobs:
 
     - name: Build Android APK
       run: |
-        flet build apk
+        # --no-interactive फ़्लैग लगाने से यह टर्मिनल में कोई सवाल नहीं पूछेगा
+        flet build apk --no-interactive
 
     - name: Upload APK Artifact
       uses: actions/upload-artifact@v4
