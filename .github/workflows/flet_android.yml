@@ -1,11 +1,9 @@
 Build Flet Android APK
-
 on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
 
-# परमानेंट सोल्यूशन: यह ब्लॉक चेतावनी को पूरी तरह से हटा देगा
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 
@@ -51,3 +49,5 @@ jobs:
       with:
         name: flet-android-app
         path: build/apk/*.apk
+
+       
