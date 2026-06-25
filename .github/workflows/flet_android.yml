@@ -1,7 +1,4 @@
 name: Build Flet Android apk
-
-name: Build Flet Android APK
-
 on:
   push:
     branches: [ main, master ]
