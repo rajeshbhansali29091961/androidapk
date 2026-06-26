@@ -1,0 +1,52 @@
+name: Build Flet Android APK
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: # मोबाइल से मैन्युअली रन करने के लिए यह बहुत ज़रूरी है
+
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Set up Java JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Set up Flutter
+      uses: subosito/flutter-action@v2
+      with:
+        flutter-version: '3.41.7' # मोबाइल लेआउट को सही रखने के लिए ज़रूरी वर्ज़न
+
+    - name: Install Android SDK
+      uses: android-actions/setup-android@v3
+
+    - name: Install Python Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install flet
+
+    - name: Build Android APK
+      run: |
+        flet build apk
+
+    - name: Upload APK Artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: flet-android-app
+        path: build/apk/*.apk
